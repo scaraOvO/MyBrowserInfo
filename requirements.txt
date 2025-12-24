@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+pymongo
+user-agents
+httpx
+jinja2
+python-multipart
