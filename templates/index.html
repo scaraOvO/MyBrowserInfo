@@ -2,73 +2,98 @@
 <html lang="zh">
 <head>
   <meta charset="UTF-8">
-  <title>Your Visit Info</title>
+  <title>{{ title }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gradient-to-br from-gray-900 to-black min-h-screen flex items-center justify-center text-gray-100">
+<body class="min-h-screen bg-cover bg-center"
+      style="background-image: url('{{ bg }}')">
 
-  <div class="max-w-xl w-full bg-gray-900/80 backdrop-blur rounded-2xl shadow-2xl p-8 space-y-6">
+<!-- 背景遮罩 -->
+<div class="min-h-screen bg-black/40 flex items-center justify-center px-4 py-8">
 
-    <div class="text-center">
-      <h1 class="text-3xl font-bold">👋 Hello</h1>
-      <p class="text-gray-400 mt-2">Here’s what we know about your visit</p>
+  <!-- 主卡片 -->
+  <div class="
+    w-full max-w-2xl
+    bg-white/70
+    backdrop-blur-xl
+    rounded-3xl
+    shadow-2xl
+    ring-1 ring-white/20
+    p-6 sm:p-8
+    space-y-8
+  ">
+
+    <!-- 标题 -->
+    <div class="text-center space-y-2">
+      <h1 class="text-3xl font-bold tracking-tight">👋 Hello</h1>
+      <p class="text-gray-700 text-sm sm:text-base">
+        This page shows what your browser shares when you visit a website.
+      </p>
     </div>
 
     <!-- 网络信息 -->
-    <div class="space-y-2">
-      <h2 class="text-lg font-semibold text-blue-400">🌐 Network</h2>
-      <div class="grid grid-cols-2 gap-4 text-sm">
-        <div>
-          <p class="text-gray-400">IP Address</p>
-          <p class="font-mono">{{ v.ip }}</p>
+    <section class="space-y-3">
+      <h2 class="text-lg font-semibold">🌐 Network</h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+        <div class="rounded-xl p-4 bg-white/60">
+          <p class="text-gray-500">IP Address</p>
+          <p class="font-mono break-all text-gray-900">{{ v.ip }}</p>
         </div>
-        <div>
-          <p class="text-gray-400">Location</p>
-          <p>{{ v.country }} {{ v.city }}</p>
+
+        <div class="rounded-xl p-4 bg-white/60">
+          <p class="text-gray-500">Location</p>
+          <p class="text-lg text-gray-900">
+            {{ v.flag }} {{ v.country }} {{ v.city }}
+          </p>
         </div>
       </div>
-    </div>
+    </section>
 
     <!-- 设备信息 -->
-    <div class="space-y-2">
-      <h2 class="text-lg font-semibold text-green-400">💻 Device</h2>
-      <div class="grid grid-cols-2 gap-4 text-sm">
-        <div>
-          <p class="text-gray-400">Type</p>
-          <p>{{ v.device }}</p>
-        </div>
-        <div>
-          <p class="text-gray-400">Architecture</p>
-          <p>{{ v.arch }}</p>
-        </div>
-      </div>
-    </div>
+    <section class="space-y-3">
+      <h2 class="text-lg font-semibold">💻 Device</h2>
 
-    <!-- 软件信息 -->
-    <div class="space-y-2">
-      <h2 class="text-lg font-semibold text-purple-400">🧭 Software</h2>
-      <div class="grid grid-cols-1 gap-3 text-sm">
-        <div>
-          <p class="text-gray-400">Operating System</p>
-          <p>{{ v.os }}</p>
-        </div>
-        <div>
-          <p class="text-gray-400">Browser</p>
-          <p>{{ v.browser }}</p>
-        </div>
-        <div>
-          <p class="text-gray-400">Language</p>
-          <p>{{ v.language }}</p>
-        </div>
+      <div class="flex items-center gap-3 text-sm">
+        <img src="/static/icons/os/{{ v.os_icon }}.svg" class="w-6 h-6 shrink-0">
+        <span class="text-gray-900">{{ v.os }}</span>
       </div>
-    </div>
 
-    <div class="border-t border-gray-700 pt-4 text-center text-xs text-gray-500">
-      Visit time: {{ v.visit_time }} UTC
+      <div class="text-gray-700 text-sm">
+        Device type: <strong>{{ v.device }}</strong>
+      </div>
+    </section>
+
+    <!-- 浏览器信息 -->
+    <section class="space-y-3">
+      <h2 class="text-lg font-semibold">🧭 Browser</h2>
+
+      <div class="flex items-center gap-3 text-sm">
+        <img src="/static/icons/browser/{{ v.browser_icon }}.svg" class="w-6 h-6 shrink-0">
+        <span class="text-gray-900">{{ v.browser }}</span>
+      </div>
+
+      <p class="text-gray-600 text-xs sm:text-sm">
+        User-Agent based detection with smart fallback
+        (Chrome / Brave / Arc / Vivaldi).
+      </p>
+    </section>
+
+    <!-- 其他 -->
+    <section class="border-t border-white/40 pt-4 text-sm text-gray-700 space-y-1">
+      <p>Language preference: <strong>{{ v.language }}</strong></p>
+      <p>Visit time (UTC): {{ v.visit_time }}</p>
+    </section>
+
+    <!-- Footer -->
+    <div class="text-xs text-center text-gray-500">
+      This site records visit metadata for technical demonstration only.
     </div>
 
   </div>
+</div>
 
 </body>
 </html>
