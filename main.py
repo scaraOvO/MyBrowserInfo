@@ -2,7 +2,7 @@ import os
 from datetime import datetime
 from dotenv import load_dotenv
 from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, PlainTextResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
@@ -43,6 +43,19 @@ async def index(request: Request):
         "os_icon": os_icon,
         "browser_icon": browser_icon,
     }
+    
+    if is_cli_request(ua_string):
+        text = f"""Visitor Info
+----------------
+IP: {visit['ip']}
+Location: {visit['country']} {visit['city']}
+OS: {visit['os']}
+Browser: {visit['browser']}
+Device: {visit['device']}
+Language: {visit['language']}
+Time (UTC): {visit['visit_time']}
+"""
+        return PlainTextResponse(text)
 
     return templates.TemplateResponse(
         "index.html",
@@ -53,3 +66,13 @@ async def index(request: Request):
             "title": SITE_TITLE,
         },
     )
+
+def is_cli_request(user_agent: str) -> bool:
+    ua = user_agent.lower()
+    return any(k in ua for k in [
+        "curl",
+        "wget",
+        "httpie",
+        "go-http-client",
+        "python-requests",
+    ])
