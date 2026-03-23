@@ -58,9 +58,9 @@ Time (UTC): {visit['visit_time']}
         return PlainTextResponse(text)
 
     return templates.TemplateResponse(
+        request,
         "index.html",
         {
-            "request": request,
             "v": visit,
             "bg": BACKGROUND_IMAGE,
             "title": SITE_TITLE,

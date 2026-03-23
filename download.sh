@@ -26,7 +26,7 @@ curl -L -o "$OS_DIR/ios.svg" \
   https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/apple.svg
 
 
-echo "⬇️  Downloading browser icons..."
+echo "⬇  Downloading browser icons..."
 
 curl -L -o "$BROWSER_DIR/chrome.svg" \
   https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/googlechrome.svg
@@ -40,4 +40,4 @@ curl -L -o "$BROWSER_DIR/safari.svg" \
 curl -L -o "$BROWSER_DIR/edge.svg" \
   https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/microsoftedge.svg
 
-echo "✅ All icons downloaded successfully!"
+echo "All icons downloaded successfully!"
