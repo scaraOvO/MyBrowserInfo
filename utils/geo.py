@@ -1,6 +1,5 @@
 import httpx
 
-
 async def get_geo(ip: str):
     try:
         async with httpx.AsyncClient(timeout=5) as client:
